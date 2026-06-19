@@ -15,6 +15,7 @@ from pydantic import BaseModel, ValidationError
 from .config import GEMINI_CHAT_MODEL, OLLAMA_CHAT_MODEL, OLLAMA_BASE_URL
 from .obs import log_call
 from .prompts import PROMPT_VERSION
+from .retry import retry_transient
 from .tracing import traceable
 
 
@@ -45,7 +46,9 @@ class GeminiLLM:
             response_schema=schema, temperature=0.2,
         )
         t0 = time.time()
-        resp = self._client.models.generate_content(model=self.model, contents=user, config=cfg)
+        resp = retry_transient(
+            lambda: self._client.models.generate_content(model=self.model, contents=user, config=cfg)
+        )
         um = getattr(resp, "usage_metadata", None)
         self.calls.append(log_call(
             node=node, provider="gemini", model=self.model, prompt_version=PROMPT_VERSION,
