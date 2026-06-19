@@ -5,7 +5,7 @@ cited answer, then **critiques its own draft** and revises it — orchestrated a
 machine. Web search is **free** (DuckDuckGo, no key). Runs on **Gemini** (paste your free key) or
 **fully local with Ollama**.
 
-<!-- Add after deploying: [![Live Demo](https://img.shields.io/badge/demo-live-brightgreen)](YOUR_STREAMLIT_URL) -->
+[![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://maksood-research-agent.streamlit.app/)
 ![Python](https://img.shields.io/badge/python-3.10%2B-blue) ![License](https://img.shields.io/badge/license-MIT-green)
 
 > **Demo:** run `streamlit run app.py` and add a screenshot/GIF here.
