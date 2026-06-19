@@ -1,0 +1,9 @@
+streamlit>=1.40
+langgraph>=1.2
+langsmith>=0.1
+ddgs>=9.14
+trafilatura>=2.0
+google-genai>=1.0
+pydantic>=2.7
+requests>=2.32
+python-dotenv>=1.0
