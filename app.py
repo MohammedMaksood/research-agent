@@ -22,6 +22,13 @@ st.title("🔎 Research Agent")
 st.caption("Multi-agent (LangGraph): plan → web search → write → self-critique → cited answer")
 
 
+def _friendly(exc, fallback):
+    if "11434" in str(exc) or "Connection refused" in str(exc):
+        return ("Couldn't reach Ollama at localhost:11434. On the hosted demo, choose **Gemini** and "
+                "paste a free key — Ollama only runs when you host the app locally.")
+    return f"{fallback}: {exc}"
+
+
 def make_llm():
     if provider.startswith("Gemini"):
         if not api_key:
@@ -72,4 +79,4 @@ if st.button("Research", type="primary") and question:
             cost = sum(c["cost_usd"] for c in llm.calls)
             st.caption(f"⚙️ {len(llm.calls)} LLM calls · {llm.provider} · ${cost:.5f}")
     except Exception as exc:
-        st.error(f"Error: {exc}")
+        st.error(_friendly(exc, "Error"))
